@@ -1,0 +1,36 @@
+{% extends "pages/page.html" %}
+
+{% load i18n %}
+
+{% block meta_title %}
+{% trans "Error" %}
+{% endblock %}
+
+{% block title %}
+{% trans "Error" %}
+{% endblock %}
+
+{% block background_style %}
+{% with "errors/500.jpg" as background %}
+{{ block.super }}
+{% endwith %}
+{% endblock %}
+
+{% block background %}
+<header class="intro-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="site-heading">
+                    <h1>500 Error</h1>
+                    <hr class="small">
+                    <span class="subheading">Sorry, an internal server error occurred</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header> 
+{% endblock %}
+
+{% block all_content %}
+{% endblock %}

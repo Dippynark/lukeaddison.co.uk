@@ -1,0 +1,39 @@
+{% extends "pages/richtextpage.html" %}
+{% load mezzanine_tags blog_tags keyword_tags i18n staticfiles %}
+
+{% block meta_title %}{{ page.title }}{% endblock %}
+
+{% block main %}    
+
+<hr>
+{% blog_recent_posts 5 as recent_posts %}
+{% if recent_posts %}
+{% for recent_post in recent_posts %}
+
+{% editable recent_post.title recent_post.subtitle %}
+<div class="post-preview">
+    <a href="{{ recent_post.get_absolute_url }}">
+        <h2 class="post-title">
+            {{ recent_post.title }}
+        </h2>
+        <h3 class="post-subtitle">
+            {{ recent_post.subtitle }}
+        </h3>
+    </a>
+    <p class="post-meta">Posted {{ recent_post.publish_date|timesince }} {% trans "ago" %}</p>
+</div>
+{% endeditable %}
+<hr>            
+   
+{% endfor %}    
+{% endif %}                   
+
+<!-- Pager -->
+<ul class="pager">
+    <li class="next">
+        <a href="blog">All Posts &rarr;</a>
+    </li>
+</ul>            
+
+{% endblock %}
+

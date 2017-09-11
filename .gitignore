@@ -1,0 +1,15 @@
+*.pyc
+*.pyo
+*.db
+.DS_Store
+.coverage
+/static/*
+!/static/media/
+/static/media/*
+!/static/media/errors/
+/static/media/errors/*
+!/static/media/errors/404.jpg
+!/static/media/errors/500.jpg
+/scripts
+/backup
+secrets.yaml

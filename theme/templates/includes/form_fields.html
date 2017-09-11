@@ -1,0 +1,47 @@
+{% load i18n %}
+{% load mezzanine_tags %}
+
+{% nevercache %}
+<input type="hidden" name="referrer" value="{{ request.META.HTTP_REFERER }}">
+{% csrf_token %}
+{% endnevercache %}
+
+{% for field in form_for_fields %}
+{% if field.is_hidden %}
+{{ field }}
+{% else %}
+<div class="row control-group"> 
+    <div class="form-group col-xs-12 floating-label-form-group controls input_{{ field.id_for_label }} {{ field.field.type }}
+        {% if field.errors %} has-error{% endif %}">
+        
+        {{ field }}
+       
+        {% if field.errors %}
+        <p class="help-block text-danger">
+            {% for e in field.errors %}
+            {% if not forloop.first %} / {% endif %}{{ e }}
+            {% endfor %}
+        </p>
+        {% elif field.help_text %}
+        <!--<p class="help-block text-danger">{{ field.help_text }}</p>-->
+        <p class="help-block text-danger"></p>
+        {% elif field.field.required %}
+        <!--<p class="help-block text-danger">{% trans "required" %}</p>-->
+        <p class="help-block text-danger"></p>
+        {% endif %}
+    </div>
+</div>
+{% endif %}
+{% endfor %}
+
+<script type="text/javascript" >
+$(document).ready(function(){
+{% for field in form_for_fields %}   
+        {% if field.label %} 
+        $("#{{ field.auto_id }}").attr('placeholder', '{{field.label}}');
+        {% endif %}
+        $("#{{ field.auto_id }}").attr('class', 'form-control');
+{% endfor %}
+$("textarea").attr('rows', '3');
+});
+</script>

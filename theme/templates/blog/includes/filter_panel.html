@@ -1,0 +1,65 @@
+{% load blog_tags keyword_tags mezzanine_tags i18n %}
+
+<hr>
+{% block blog_recent_posts %}
+{% blog_recent_posts 5 as recent_posts %}
+{% if recent_posts %}
+<h2>{% trans "Latest Posts" %}</h2>
+<ul class="list-unstyled recent-posts">
+{% for recent_post in recent_posts %}
+<li>
+    {% spaceless %}
+    &rarr; <a href="{{ recent_post.get_absolute_url }}">{{ recent_post.title }}</a>
+    {% endspaceless %}
+</li>
+{% endfor %}
+</ul>
+{% endif %}
+{% endblock %}
+<hr>
+{% block blog_months %}
+{% blog_months as months %}
+{% if months %}
+<h2>{% trans "Archive" %}</h2>
+{% for month in months %}
+    {% ifchanged month.date.year %}
+        {% if not forloop.first %}</ul>{% endif %}
+        <h4>{{ month.date.year }}</h4><ul class="list-unstyled">
+    {% endifchanged %}
+    <li><a href="{% url "blog_post_list_month" year=month.date.year month=month.date.month %}"
+        >{{ month.date|date:"F" }}</a> ({{ month.post_count }})</li>
+{% endfor %}
+</ul>
+{% endif %}
+{% endblock %}
+
+{% block blog_categories %}
+{% blog_categories as categories %}
+{% if categories %}
+<h2>{% trans "Categories" %}</h2>
+<ul class="list-unstyled">
+{% for category in categories %}
+<li><a href="{% url "blog_post_list_category" category.slug %}"
+    >{{ category }}</a> ({{ category.post_count }})</li>
+{% endfor %}
+</ul>
+{% endif %}
+{% endblock %}
+
+{% block blog_keywords %}
+{% keywords_for blog.blogpost as tags %}
+{% if tags %}
+<h2>{% trans "Tags" %}</h2>
+<ul class="list-inline tag-cloud">
+{% for tag in tags %}
+<li>
+    <a href="{% url "blog_post_list_tag" tag.slug %}"
+        class="tag-weight-{{ tag.weight }}">{{ tag }}</a>
+    ({{ tag.item_count }})
+</li>
+{% endfor %}
+</ul>
+{% endif %}
+{% endblock %}
+<hr>
+

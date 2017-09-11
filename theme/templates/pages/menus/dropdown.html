@@ -1,0 +1,23 @@
+{% load mezzanine_tags i18n pages_tags %}
+{% spaceless %}
+{% if page_branch_in_menu %}
+
+{% if branch_level == 0 %}
+<ul class="nav navbar-nav navbar-right">
+    {% for page in page_branch %}    
+    {% if page.in_menu %}
+    <li id="{{ page.html_id }}">
+        <a href="{{ page.get_absolute_url }}">
+            {{ page.title }}
+        </a>
+    </li>
+    {% endif %}
+    {% endfor %}
+    <li>
+      {% search_form %}
+    </li>
+</ul>
+{% endif %}
+
+{% endif %}
+{% endspaceless %}

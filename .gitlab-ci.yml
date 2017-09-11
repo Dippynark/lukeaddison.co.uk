@@ -1,0 +1,19 @@
+variables:
+  PROJECT_PATH: "/home/luke/Documents/workspace/python/lukeaddison.co.uk"
+
+before_script: 
+  - cd "$PROJECT_PATH"
+
+stages: 
+  - deploy
+
+deploy:
+  script: 
+    - git pull git@home-server:lukeaddison/lukeaddison.co.uk.git
+    - source ~/.virtualenvs/lukeaddison.co.uk/bin/activate
+    - pip install -r requirements.txt
+    - python manage.py migrate --noinput
+    - python manage.py collectstatic --no-input
+  stage: deploy
+  tags:
+    - home-server

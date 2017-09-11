@@ -1,0 +1,243 @@
+@import "variables.less";
+@import "mixins.less";
+
+#main img {
+  width: 100%;
+  height: 100%;
+}
+#main {
+  font-size: @main-font-size;
+}
+#main pre {
+  border: 1px solid #f2f2f2;
+  border-radius: 0px;
+  padding: 0;
+}
+#main code {
+  background-color: #f8f8f8;
+  //background-color: white;
+  //padding: 0;
+}
+#main pre code {
+  overflow-x:scroll;
+  white-space: pre;
+  padding: 9.5px;
+  background-color: #f8f8f8;
+}
+#main pre {
+  .hljs-string, .hljs-title, .hljs-section, .hljs-attribute, .hljs-literal, .hljs-template-tag, .hljs-template-variable, .hljs-type, .hljs-addition {
+    color: #c7254e;
+  }
+}
+#main .editable-original > pre {
+  border: 1px solid #eff0f1;
+  border-radius: 0px;
+  background-color: #eff0f1;  
+}
+#right_panel {
+  .sans-serif-font;
+  font-weight: 300;
+  font-size: @right-panel-font-size;
+  line-height: 1.1;
+  color: inherit;
+}
+#right_panel a {
+  text-decoration: none;
+}
+blockquote p {
+  margin: 0;
+}
+body {
+    font-family: Lora,'Times New Roman',serif;
+    font-size: @body-font-size;
+    -webkit-tap-highlight-color: @theme-primary;
+    .sans-serif-font;
+    font-weight: 300;
+}
+.post-preview > a > .post-title {
+  margin-top: 20px;
+  font-size: 30px;
+}
+.post-preview > .post-meta {
+  margin-bottom: 15px;
+}
+body p {
+    margin: 20px 0;
+}
+.list-unstyled > li:not(:last-child) {
+  margin-bottom: 10px;
+}
+
+// Header
+.intro-header {
+    margin-bottom: 10px
+}
+.intro-header .site-heading h1, .intro-header .page-heading h1 {
+    font-size: 40px;
+}
+@media only screen and (min-width: 768px) {
+    .intro-header {
+        margin-bottom: 30px
+    }
+    .intro-header .site-heading h1, .intro-header .page-heading h1 {
+        font-size: 60px;
+    }
+}
+
+
+// Navbar
+.navbar-form input {
+    color: black;
+}
+.navbar-form {
+    margin: 0;
+    border: none;
+    padding-top: 0px;
+}
+.navbar-form .btn {
+    padding: 15px;
+    font-size: 1em;
+    color: #777;
+}
+.navbar-form .btn {
+    padding: 15px;
+    font-size: 12px;
+    color: #777;
+}
+.navbar.navbar-default.navbar-form .btn-default:hover,
+.navbar.navbar-default.navbar-form .btn-default:focus {
+    color: white;
+}
+.navbar.navbar-default .navbar-nav li a:hover,
+.navbar.navbar-default .navbar-nav li a:focus {
+    color: white;
+    background-color : @theme-primary;
+}
+.navbar.navbar-default .navbar-form .btn-default:hover,
+.navbar.navbar-default .navbar-form .btn-default:focus {
+    color: white;
+}
+.navbar-form .btn {
+  float: right;
+}
+.navbar-form .form-group {
+    float: left;
+    padding-top: 10px;
+}
+.navbar .navbar-brand {
+    padding: 18px 15px 34px 15px;
+}
+@media only screen and (min-width: 768px) {
+  .navbar-form .form-group {
+      float: left;
+      padding-top: 13px;
+  }
+  .navbar-form .btn {
+    padding: 21px 21px 22px 24px;
+  }
+  .navbar-form .form-control {
+    padding-top: 4px;
+    padding-bottom: 8px;
+    max-width: 240px;
+    margin-right: 10px;
+  }
+  .navbar-form {
+    padding-bottom: 0;
+    padding-right:0;
+  }
+  .navbar-form input {
+    border: none;
+    color: white;
+  }
+  .navbar.is-fixed .navbar-form input {
+    color: black;
+  }
+  .navbar.navbar-default .navbar-form .btn-default:hover,
+  .navbar.navbar-default .navbar-form .btn-default:focus {
+    border: none;
+    color: white;
+  }
+  .navbar.navbar-default {
+    border: none;
+  }
+  .navbar-form .btn {
+    color: white;
+  }
+  .navbar.is-fixed .btn {
+    color: black;
+  }
+  .navbar.navbar-default li a {
+    padding: 20px
+  }
+  .navbar input::-webkit-input-placeholder { /* WebKit, Blink, Edge */
+      color: #C3C3C3 !important;
+  }
+  .navbar input:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+     color: #C3C3C3 !important;
+     opacity:  1;
+  }
+  .navbar input::-moz-placeholder { /* Mozilla Firefox 19+ */
+     color: #C3C3C3 !important;
+     opacity:  1;
+  }
+  .navbar input:-ms-input-placeholder { /* Internet Explorer 10-11 */
+     color: #C3C3C3 !important;
+  }
+  .navbar.is-fixed input::-webkit-input-placeholder { /* WebKit, Blink, Edge */
+      color: #535353 !important;
+  }
+  .navbar.is-fixed input:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+     color: #535353 !important;
+     opacity:  1;
+  }
+  .navbar.is-fixed input::-moz-placeholder { /* Mozilla Firefox 19+ */
+     color: #535353 !important;
+     opacity:  1;
+  }
+  .navbar.is-fixed input:-ms-input-placeholder { /* Internet Explorer 10-11 */
+     color: #535353 !important;
+  }
+}
+
+// Pager
+.pager .disabled {
+  visibility: hidden;
+}
+/*.pager .active a {
+    color: white;
+    background-color : @theme-primary;
+    border-color: @theme-primary;
+}*/
+.pager li.page-number {
+  display: none;
+}
+@media only screen and (min-width: 768px) {
+  .pager li.page-number {
+    display: inline;
+  }
+}
+
+// Editable
+.editable-form .wmd-preview p {
+  line-height: 1.5 !important;
+}
+.editable-form .wmd-preview code {
+  color: #c7254e;
+  background-color: #f8f8f8;
+}
+.editable-form {
+  color: black;
+}
+.wmd-prompt-dialog {
+  z-index: 10000 !important;
+}
+.ui-dialog {
+  z-index: 10000 !important;
+}
+#main .wmd-preview pre code {
+  color: black;
+  background-color: #f8f8f8;
+}
+
+
+

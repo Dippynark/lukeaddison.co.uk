@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+{% load mezzanine_tags keyword_tags easy_thumbnails_tags %}
+
+{% block meta_title %}{{ page.meta_title }}{% endblock %}
+
+{% block meta_keywords %}{% metablock %}
+{% keywords_for page as keywords %}
+{% for keyword in keywords %}
+    {% if not forloop.first %}, {% endif %}
+    {{ keyword }}
+{% endfor %}
+{% endmetablock %}{% endblock %}
+
+{% block meta_description %}{% metablock %}
+{{ page.description }}
+{% endmetablock %}{% endblock %}
+
+{% block title %}
+{% editable page.title %}{{ page.title }}{% endeditable %}
+{% endblock %}
+
+{% block header %}
+<!-- Page Header -->
+<!-- Set your background image for this header in the style block below. -->
+{% with page.background as background %}
+{% block background_style %}
+<style>    
+    .intro-header {background-image: url('{% thumbnail background 320x0 %}');}
+    @media only screen and (min-width: 320px) {.intro-header {background-image: url('{% thumbnail background 480x0 %}');}}
+    @media only screen and (min-width: 481px) {.intro-header {background-image: url('{% thumbnail background 640x0 %}');}}
+    @media only screen and (min-width: 641px) {.intro-header {background-image: url('{% thumbnail background 960x0 %}');}}
+    @media only screen and (min-width: 961px) {.intro-header {background-image: url('{% thumbnail background 1024x0 %}');}}
+    @media only screen and (min-width: 1025px) {.intro-header {background-image: url('{% thumbnail background 1223x0 %}');}}
+    @media only screen and (min-width: 1224px) {.intro-header {background-image: url('{% thumbnail background 1823x0 %}');}}
+    @media only screen and (min-width: 1824px) {.intro-header {background-image: url('{% thumbnail background 2423x0 %}');}}
+    @media only screen and (min-width: 2424px) {.intro-header {background-image: url('{% thumbnail background 10000x0 %}');}}    
+</style>
+{% endblock %}
+{% endwith %}
+
+{% block background %}
+<header class="intro-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="site-heading">
+                    {% editable page.title page.heading page.subheading %}
+                    {% if page.heading and page.subheading %}
+                        <h1>{{ page.heading }}</h1>
+                        <hr class="small">
+                        <span class="subheading">{{ page.subheading }}</span>
+                    {% elif page.heading %}
+                        <h1>{{ page.heading }}</h1>
+                        <hr class="small">
+                    {% elif page.subheading %}
+                        <h1>{{ page.title }}</h1>
+                        <hr class="small">
+                        <span class="subheading">{{ page.subheading }}</span>
+                    {% else %}
+                        <h1>{{ page.title }}</h1>
+                        <hr class="small">                            
+                    {% endif %}
+                    {% endeditable %}
+                </div>
+            </div>
+        </div>
+    </div>
+</header>   
+{% endblock %}
+{% endblock %}
+
+{% block main %}
+{% endblock %}

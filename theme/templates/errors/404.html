@@ -1,0 +1,36 @@
+{% extends "pages/page.html" %}
+
+{% load i18n %}
+
+{% block meta_title %}
+{% trans "Page not found" %}
+{% endblock %}
+
+{% block title %}
+{% trans "Page not found" %}
+{% endblock %}
+
+{% block background_style %}
+{% with "errors/404.jpg" as background %}
+{{ block.super }}
+{% endwith %}
+{% endblock %}
+
+{% block background %}
+<header class="intro-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="site-heading">
+                    <h1>404 Error</h1>
+                    <hr class="small">
+                    <span class="subheading">Sorry, the page you requested does not exist</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header> 
+{% endblock %}
+
+{% block all_content %}
+{% endblock %}

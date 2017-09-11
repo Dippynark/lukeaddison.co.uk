@@ -1,0 +1,63 @@
+{% extends "pages/richtextpage.html" %}
+
+{% load i18n mezzanine_tags %}
+
+{% block meta_title %}{% trans "Search Results" %}{% endblock %}
+{% block title %}{% trans "Search Results" %}{% endblock %}
+{% block extra_head %}
+<meta name="robots" content="noindex">
+{% endblock %}
+
+{% block breadcrumb_menu %}
+<li>
+    <a href="{% url "home" %}">{% trans "Home" %}</a>
+</li>
+<li class="active">{% trans "Search Results" %}</li>
+{% endblock %}
+
+{% block main %}
+<p>
+{% if results.paginator.count == 0 %}
+{% blocktrans %}
+No results were found matching your query: {{ query }}
+{% endblocktrans %}
+{% else %}
+{% blocktrans with start=results.start_index end=results.end_index total=results.paginator.count %}
+Showing {{ start }} to {{ end }} of {{ total }} results matching your query: {{ query }}
+{% endblocktrans %}
+{% endif %}
+</p>  
+
+{% if results.object_list %}          
+<hr>
+{% endif %}
+{% for result in results.object_list %}
+{% editable result.title result.subtitle %}
+
+{% with result.get_absolute_url as result_url %}
+<div class="post-preview">
+    {% if result_url %}<a href="{{ result_url }}">{% endif %}
+        <h2 class="post-title">
+            {{ result }}
+        </h2>
+        <h3 class="post-subtitle">
+            {% if result.subtitle %}
+                {{ result.subtitle }}
+            {% elif result.description != result|stringformat:"s" %}
+                {{ result.description|truncatewords_html:20|safe }}
+            {% endif %}
+        </h3>
+    {% if result_url %}</a>{% endif %}
+    {% if result.publish_date %}
+    <p class="post-meta">Posted on {{ result.publish_date }}</p>
+    {% endif %}
+</div>
+<hr>
+{% endwith %}
+
+{% endeditable %}
+{% endfor %}            
+
+{% pagination_for results %}
+        
+{% endblock %}
