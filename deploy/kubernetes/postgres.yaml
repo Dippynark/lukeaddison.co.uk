@@ -17,36 +17,43 @@ spec:
       - name: postgres
         image: postgres:9.3           
         env:
-        - name: POSTGRES_PASSWORD
-          valueFrom:
-            secretKeyRef:
-              name:  postgres
-              key: password
         - name: POSTGRES_USER
           valueFrom:
             secretKeyRef:
               name:  postgres
               key: username
+        - name: POSTGRES_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name:  postgres
+              key: password
         - name: POSTGRES_DB
           value: "lukeaddison_co_uk"
         - name: PGDATA
           value: "/var/lib/postgresql/data/pgdata"
+        resources:
+          requests:
+            memory: 512Mi
+            cpu: 500m
+          limits:            
+            memory: 1Gi
+            cpu: 1000m
         livenessProbe:
           exec:
             command:
             - pg_isready
             - -h
-            - localhost
+            - postgrest
             - -U
             - postgres
-          initialDelaySeconds: 30
+          initialDelaySeconds: 180
           timeoutSeconds: 5
         readinessProbe:
           exec:
             command:
             - pg_isready
             - -h
-            - localhost
+            - postgres
             - -U
             - postgres
           initialDelaySeconds: 5
@@ -56,11 +63,13 @@ spec:
           name: postgres
         volumeMounts:
         - name: postgres-persistent-storage
-          mountPath: "/var/lib/postgresql/data"                     
+          mountPath: "/var/lib/postgresql/data"   
+      nodeSelector:
+        kubernetes.io/hostname: node1.lukeaddison.co.uk
       volumes:
       - name: postgres-persistent-storage
-        persistentVolumeClaim:
-          claimName: postgres
+        hostPath:
+          path: /lukeaddison.co.uk/postgres
 ---
 apiVersion: v1
 kind: Service

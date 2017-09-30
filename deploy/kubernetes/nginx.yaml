@@ -18,17 +18,17 @@ data:
             log_not_found   off;
         }
 
+        location /robots.txt {
+            root            /usr/share/nginx/html/static;
+            access_log      off;
+            log_not_found   off;
+        }
+
         location /static/ {
             root /usr/share/nginx/html;
             access_log      off;
             log_not_found   off;
             expires 30d;
-        }
-
-        location /robots.txt {
-            root            /usr/share/nginx/html/static;
-            access_log      off;
-            log_not_found   off;
         }
 
         #location / {
@@ -59,6 +59,13 @@ spec:
           mountPath: /usr/share/nginx/html/static
         - name: nginx-config
           mountPath: /etc/nginx/conf.d
+        resources:
+          requests:
+            memory: 64Mi
+            cpu: 100m
+          limits:            
+            memory: 64Mi
+            cpu: 100m
         livenessProbe:
           httpGet:
             path: /robots.txt
