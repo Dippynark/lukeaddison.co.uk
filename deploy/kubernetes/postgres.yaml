@@ -43,7 +43,7 @@ spec:
             command:
             - pg_isready
             - -h
-            - postgrest
+            - localhost
             - -U
             - postgres
           initialDelaySeconds: 180
@@ -53,7 +53,7 @@ spec:
             command:
             - pg_isready
             - -h
-            - postgres
+            - localhost
             - -U
             - postgres
           initialDelaySeconds: 5
@@ -64,12 +64,14 @@ spec:
         volumeMounts:
         - name: postgres-persistent-storage
           mountPath: "/var/lib/postgresql/data"   
-      nodeSelector:
-        kubernetes.io/hostname: node1.lukeaddison.co.uk
+#      nodeSelector:
+#        kubernetes.io/hostname: node1.lukeaddison.co.uk
       volumes:
       - name: postgres-persistent-storage
-        hostPath:
-          path: /lukeaddison.co.uk/postgres
+        persistentVolumeClaim:
+          claimName: postgres
+#        hostPath:
+#          path: /lukeaddison.co.uk/postgres
 ---
 apiVersion: v1
 kind: Service

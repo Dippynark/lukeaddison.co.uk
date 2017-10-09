@@ -1,0 +1,27 @@
+mezzanine:
+  replicaCount: 1
+  image:
+    repository: dippynark/lukeaddison.co.uk 
+    tag: latest
+    pullPolicy: IfNotPresent
+  service:
+    name: http
+    type: ClusterIP
+    externalPort: 8000
+    internalPort: 8000
+
+ingress:
+  enabled: true
+  hosts:
+    - blog.lukeaddison.co.uk
+    - www.lukeaddison.co.uk
+    - lukeaddison.co.uk
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    kubernetes.io/tls-acme: "true"
+  tls:
+    - secretName: lukeaddison-tls
+      hosts:
+        - blog.lukeaddison.co.uk
+        - www.lukeaddison.co.uk
+        - lukeaddison.co.uk
