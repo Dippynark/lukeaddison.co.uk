@@ -1,9 +1,9 @@
 mezzanine:
-  replicaCount: 1
+  replicaCount: 2
   image:
     repository: dippynark/lukeaddison.co.uk 
     tag: latest
-    pullPolicy: IfNotPresent
+    pullPolicy: Always
   service:
     name: http
     type: ClusterIP
