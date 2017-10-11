@@ -51,12 +51,19 @@ spec:
             - postgres
           initialDelaySeconds: 5
           timeoutSeconds: 1
+        resources:
+          limits:
+            cpu: "1"
+            memory: 1Gi
+          requests:
+            cpu: 500m
+            memory: 512Mi
         ports:
         - containerPort: 5432
           name: postgres
         volumeMounts:
-        - name: postgres-persistent-storage
-          mountPath: "/var/lib/postgresql/data"                     
+        - mountPath: /var/lib/postgresql/data
+          name: postgres-persistent-storage  
       volumes:
       - name: postgres-persistent-storage
         persistentVolumeClaim:
