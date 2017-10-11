@@ -13,3 +13,4 @@
 /scripts
 /backup
 secrets.yaml
+local_settings.py
