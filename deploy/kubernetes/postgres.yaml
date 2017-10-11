@@ -17,20 +17,27 @@ spec:
       - name: postgres
         image: postgres:9.3           
         env:
-        - name: POSTGRES_PASSWORD
-          valueFrom:
-            secretKeyRef:
-              name:  postgres
-              key: password
         - name: POSTGRES_USER
           valueFrom:
             secretKeyRef:
               name:  postgres
               key: username
+        - name: POSTGRES_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name:  postgres
+              key: password
         - name: POSTGRES_DB
           value: "lukeaddison_co_uk"
         - name: PGDATA
           value: "/var/lib/postgresql/data/pgdata"
+        resources:
+          requests:
+            memory: 512Mi
+            cpu: 500m
+          limits:            
+            memory: 1Gi
+            cpu: 1000m
         livenessProbe:
           exec:
             command:
@@ -39,7 +46,7 @@ spec:
             - localhost
             - -U
             - postgres
-          initialDelaySeconds: 30
+          initialDelaySeconds: 180
           timeoutSeconds: 5
         readinessProbe:
           exec:
@@ -62,8 +69,8 @@ spec:
         - containerPort: 5432
           name: postgres
         volumeMounts:
-        - mountPath: /var/lib/postgresql/data
-          name: postgres-persistent-storage  
+        - name: postgres-persistent-storage
+          mountPath: "/var/lib/postgresql/data" 
       volumes:
       - name: postgres-persistent-storage
         persistentVolumeClaim:
