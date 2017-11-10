@@ -25,6 +25,4 @@ ingress:
         - blog.lukeaddison.co.uk
         - www.lukeaddison.co.uk
         - lukeaddison.co.uk
-
-#memcached:
-#  replicaCount: 1
+        
