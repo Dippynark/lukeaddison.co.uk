@@ -39,12 +39,12 @@ spec:
           limits:            
             memory: 512Mi
             cpu: 500m
-#        livenessProbe:
-#          httpGet:
-#            path: /
-#            port: 8000
-#          initialDelaySeconds: 60
-#          periodSeconds: 3
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 8000
+          initialDelaySeconds: 60
+          periodSeconds: 3
         readinessProbe:
           httpGet:
             path: /

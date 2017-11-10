@@ -25,3 +25,9 @@ ingress:
         - blog.lukeaddison.co.uk
         - www.lukeaddison.co.uk
         - lukeaddison.co.uk
+<<<<<<< HEAD
+=======
+
+#memcached:
+#  replicaCount: 1
+>>>>>>> merge-remote
