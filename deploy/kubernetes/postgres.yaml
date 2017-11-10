@@ -64,14 +64,10 @@ spec:
         volumeMounts:
         - name: postgres-persistent-storage
           mountPath: "/var/lib/postgresql/data"   
-#      nodeSelector:
-#        kubernetes.io/hostname: node1.lukeaddison.co.uk
       volumes:
       - name: postgres-persistent-storage
         persistentVolumeClaim:
           claimName: postgres
-#        hostPath:
-#          path: /lukeaddison.co.uk/postgres
 ---
 apiVersion: v1
 kind: Service

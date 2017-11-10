@@ -47,12 +47,14 @@ spec:
             path: /
             port: {{ .Values.mezzanine.service.internalPort }}
           initialDelaySeconds: 30
-          periodSeconds: 3
+          periodSeconds: 5
+          timeoutSeconds: 5
         readinessProbe:
           httpGet:
             path: /
             port: {{ .Values.mezzanine.service.internalPort }}
-          periodSeconds: 3
+          periodSeconds: 5
+          timeoutSeconds: 5
         volumeMounts:
         - name: local-settings
           mountPath: /usr/src/app/lukeaddison_co_uk/local
