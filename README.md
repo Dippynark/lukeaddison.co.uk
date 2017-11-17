@@ -18,4 +18,4 @@ highlight.js languages used:
   - go
   - intel x86 assembly
   - mips assembly
-  = yaml
+  - yaml
