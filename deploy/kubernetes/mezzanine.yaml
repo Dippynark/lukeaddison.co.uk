@@ -44,12 +44,12 @@ spec:
             path: /
             port: 8000
           initialDelaySeconds: 60
-          periodSeconds: 3
+          periodSeconds: 10
         readinessProbe:
           httpGet:
             path: /
             port: 8000
-          periodSeconds: 3
+          periodSeconds: 10
         volumeMounts:
         - name: local-settings
           mountPath: /usr/src/app/lukeaddison_co_uk/local
